@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário Geovanna!</title>
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffd1dc, #ffecf5);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        
+        /* Página inicial com o presente */
+        .home-page {
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2s;
+        }
+        
+        .title {
+            font-size: 3rem;
+            color: #ff1493;
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 0 #fff, 5px 5px 0 rgba(0,0,0,0.1);
+        }
+        
+        .gift-container {
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+        
+        .gift-container:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .gift {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+        }
+        
+        .instruction {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #ff1493;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Landing page de aniversário */
+        .birthday-page {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .main-title {
+            font-size: 4.5rem;
+            color: #ff1493;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ff85a2, #ffaeb9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 4px 4px 0 #fff, 8px 8px 0 rgba(0,0,0,0.1);
+            margin: 30px 0;
+            font-family: 'Pacifico', cursive;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .characters {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        
+        .character {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 8px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hello-kitty {
+            background-image: url('https://i.pinimg.com/originals/fa/96/0e/fa960e5fec8b9b2c3f7a3b3c4c5b4b4a.png');
+        }
+        
+        .kuromi {
+            background-image: url('https://i.pinimg.com/originals/1c/74/9b/1c749b0d7c0b0c0c0c0c0c0c0c0c0c0c.png');
+        }
+        
+        .message-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 5px solid #ffb6c1;
+        }
+        
+        .message-container::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ff85a2, #ffaeb9);
+            z-index: -1;
+            border-radius: 25px;
+        }
+        
+        .message {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+            text-transform: lowercase;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .message::first-letter {
+            font-size: 3rem;
+            color: #ff1493;
+            float: left;
+            margin-right: 10px;
+            line-height: 1;
+        }
+        
+        .decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            z-index: 1;
+            opacity: 0.2;
+        }
+        
+        .decoration:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,15 C60,5 80,5 90,15 C100,25 100,45 90,55 C80,65 60,65 50,55 C40,65 20,65 10,55 C0,45 0,25 10,15 C20,5 40,5 50,15 Z" fill="hotpink"/></svg>');
+        }
+        
+        .decoration:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            transform: rotate(30deg);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="deeppink"/></svg>');
+        }
+        
+        .decoration:nth-child(3) {
+            bottom: 15%;
+            left: 15%;
+            transform: rotate(45deg);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 L60,40 L90,40 L65,60 L75,90 L50,70 L25,90 L35,60 L10,40 L40,40 Z" fill="pink"/></svg>');
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #ff1493;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Efeitos especiais */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 1000;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            z-index: 1;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .balloon:nth-child(1) {
+            background: radial-gradient(circle at 30% 30%, #ff1493, #ff69b4);
+            left: 5%;
+            top: 10%;
+            animation-delay: 0s;
+        }
+        
+        .balloon:nth-child(2) {
+            background: radial-gradient(circle at 30% 30%, #87ceeb, #b0e0e6);
+            right: 10%;
+            top: 20%;
+            animation-delay: 1s;
+        }
+        
+        .balloon:nth-child(3) {
+            background: radial-gradient(circle at 30% 30%, #98fb98, #90ee90);
+            left: 15%;
+            bottom: 15%;
+            animation-delay: 2s;
+        }
+        
+        .balloon:nth-child(4) {
+            background: radial-gradient(circle at 30% 30%, #ffd700, #ffec8b);
+            right: 5%;
+            bottom: 10%;
+            animation-delay: 3s;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .title, .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .character {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Página inicial com o presente -->
+    <div class="home-page" id="homePage">
+        <h1 class="title">Clique no presente!</h1>
+        <div class="gift-container" onclick="openBirthdayPage()">
+            <!-- Imagem do presente em formato GIF - substitua pelo seu gift.gif -->
+            <img src="https://images.app.goo.gl/yv6ExgwmQEugf7cs7" alt="Presente de Aniversário" class="gift">
+        </div>
+        <p class="instruction">clique no presente para abrir</p>
+    </div>
+    
+    <!-- Landing page de aniversário -->
+    <div class="birthday-page" id="birthdayPage">
+        <!-- Balões decorativos -->
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        
+        <!-- Elementos decorativos -->
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        
+        <div class="header">
+            <h1 class="main-title">feliz aniversario geovanna!</h1>
+        </div>
+        
+        <div class="characters">
+            <div class="character hello-kitty"></div>
+            <div class="character kuromi"></div>
+        </div>
+        
+        <div class="message-container">
+            <p class="message">
+                querida geovanna, hoje é o seu dia especial e não poderia deixar de expressar todo o carinho e admiração que sinto por você! neste novo ciclo que se inicia, desejo que cada momento seja repleto de alegrias, conquistas e realizações. que a hello kitty traga toda a fofura do mundo para o seu dia e que a kuromi te inspire com sua personalidade única e encantadora. você é uma pessoa incrível, cheia de luz e energia positiva, e merece tudo de melhor que a vida pode oferecer. que este novo ano traga muitos sorrisos, amizades verdadeiras, amor incondicional e sonhos realizados. que cada instante seja mágico e especial, assim como você é para todos que têm a sorte de te conhecer. aproveite cada segundo desta data tão significativa, rodeada de quem te ama e te faz feliz. que sua vida continue sendo uma linda jornada, repleta de histórias maravilhosas para contar e momentos inesquecíveis para guardar no coração. feliz aniversário, geovanna! que este seja apenas o começo de um ano extraordinário, cheio de conquistas, aprendizado e muita, muita felicidade! com todo carinho do mundo...
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>com amor, Allyson ❤️</p>
+        </div>
+    </div>
+    
+    <script>
+        function openBirthdayPage() {
+            // Esconde a página inicial
+            document.getElementById('homePage').style.display = 'none';
+            
+            // Mostra a página de aniversário
+            document.getElementById('birthdayPage').style.display = 'block';
+            
+            // Animação de confete
+            createConfetti();
+        }
+        
+        function createConfetti() {
+            const colors = ['#ff1493', '#ff69b4', '#87ceeb', '#98fb98', '#ffd700', '#da70d6'];
+            const container = document.body;
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Posição aleatória
+                const posX = Math.random() * window.innerWidth;
+                const posY = Math.random() * window.innerHeight;
+                
+                // Cor aleatória
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Tamanho aleatório
+                const size = Math.random() * 10 + 5;
+                
+                confetti.style.left = `${posX}px`;
+                confetti.style.top = `${posY}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                
+                container.appendChild(confetti);
+                
+                // Animação
+                const animation = confetti.animate([
+                    { transform: `translateY(${-window.innerHeight}px) rotate(0deg)`, opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+                });
+                
+                // Remover após animação
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+    </script>
+</body>
+</html>
